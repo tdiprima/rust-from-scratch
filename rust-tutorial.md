@@ -274,6 +274,8 @@ Rust code must compile without warnings/errors—it's strict, which catches bugs
 
 ### 6. Next Steps and Resources
 - **Practice**: Build more! Try the official Rustlings exercises (`cargo install rustlings`).
+- $HOME/.cargo/bin/rustlings
+- Executable: `rustlings`
 - **Learn More**:
   - [The Rust Book](https://doc.rust-lang.org/book/) – Free, official tutorial.
   - [Rust by Example](https://doc.rust-lang.org/rust-by-example/) – Interactive examples.
