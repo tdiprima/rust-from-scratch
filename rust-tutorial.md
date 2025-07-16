@@ -285,4 +285,6 @@ Rust has a learning curve due to ownership, but once you get it, it's empowering
 
 &mdash; Grok4
 
+See also: https://www.rust-lang.org/learn/get-started
+
 <br>
