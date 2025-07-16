@@ -214,4 +214,6 @@ fn main() {
 
 This covers the "core basics" — enough to write simple apps like calculators or games. If you share what you've tried or want to focus on (e.g., more on games or web?), I can expand! Keep going; Rust is rewarding once you get the hang of it. 🚀
 
+&mdash; Grok4
+
 <br>
