@@ -1,2 +1,2 @@
 # rust-from-scratch
-Practicing Rust through projects or exercises
+Practicing Rust through projects and exercises
