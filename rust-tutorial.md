@@ -285,7 +285,7 @@ Rust code must compile without warnings/errors—it's strict, which catches bugs
 
 Rust has a learning curve due to ownership, but once you get it, it's empowering. If you have questions or want examples for specific topics (e.g., web dev with Rust), ask! Happy coding! 🚀
 
-&mdash; Grok4
+&mdash; *Grok4*
 
 ### See also:
 * https://www.rust-lang.org/learn/get-started
