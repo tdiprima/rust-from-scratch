@@ -1,4 +1,4 @@
-Absolutely, teaching Rust like a natural language is a great analogy! Just as you'd learn everyday words (nouns like "apple" or "house"), phrases (sentences like "I eat an apple"), and grammar rules to build conversations, we'll focus on Rust's "core vocabulary" — basic syntax, common functions, and patterns that let you write simple programs. We'll skip the super-advanced stuff (like lifetimes or async) for now, and aim for things a 10th-grader could grasp with some practice. Think of Rust as a "safe and fast" programming language: it's like English but with strict rules to prevent mistakes (e.g., no "dangling participles" that crash your program).
+Teaching Rust like a natural language is a great analogy! Just as you'd learn everyday words (nouns like "apple" or "house"), phrases (sentences like "I eat an apple"), and grammar rules to build conversations, we'll focus on Rust's "core vocabulary" — basic syntax, common functions, and patterns that let you write simple programs. We'll skip the super-advanced stuff (like lifetimes or async) for now, and aim for things a 10th-grader could grasp with some practice. Think of Rust as a "safe and fast" programming language: it's like English but with strict rules to prevent mistakes (e.g., no "dangling participles" that crash your program).
 
 I'll structure this like a mini-lesson. We'll build from "hello world" to simple programs. I'll explain concepts simply, show code examples (you can copy-paste them into the Rust Playground online at play.rust-lang.org to run them), and use analogies. Prerequisites: You should know basic programming ideas (like variables or loops) from something like Python or Scratch, but if not, that's okay — we'll cover them.
 
@@ -214,6 +214,6 @@ fn main() {
 
 This covers the "core basics" — enough to write simple apps like calculators or games. If you share what you've tried or want to focus on (e.g., more on games or web?), I can expand! Keep going; Rust is rewarding once you get the hang of it. 🚀
 
-&mdash; Grok4
+&mdash; *Grok4*
 
 <br>
