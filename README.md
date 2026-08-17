@@ -80,6 +80,7 @@ Paste any snippet into the [Rust Playground](https://play.rust-lang.org) to run 
 rust-from-scratch/
 ├── hello_rust/          # Cargo project — Hello World
 ├── guessing_game/       # Cargo project — number guessing game (uses rand crate)
+├── todo-list-cli/       # Cargo project — todo list tutorial
 ├── rust-tutorial.md     # Comprehensive beginner tutorial
 └── syntax.md            # Syntax-focused reference with analogies
 ```
