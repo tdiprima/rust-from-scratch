@@ -1,4 +1,4 @@
-# Rust: The Practical Guide
+# Lesson 3: Todo List CLI
 
 A hands-on guide to Rust's core language concepts, followed by a project walkthrough where you build a to-do list CLI app.
 
