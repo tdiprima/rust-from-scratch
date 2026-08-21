@@ -540,6 +540,6 @@ Once this works, try extending it:
 | Traits | Shared behavior across types; like interfaces |
 | `String` vs `&str` | Owned vs borrowed string data |
 
-&mdash; *Opus 4.6*
+&mdash; *Opus 4.6;* Aug 17, 2026
 
 <br>

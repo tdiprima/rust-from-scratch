@@ -71,6 +71,6 @@ It generates a random number and lets you guess until you get it right.
 - **Pattern matching**: `match` on `Ordering` enum variants
 - **Variable shadowing**: Reusing the name `guess` for both `String` and `u32`
 
-&mdash; *Grok4*
+&mdash; *Grok4*; July 16, 2025
 
 <br>
