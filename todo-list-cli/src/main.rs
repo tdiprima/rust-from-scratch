@@ -1,108 +1,81 @@
+//! To-do list CLI: read a command, apply it, print the result, repeat.
+
+mod command;
+mod task;
+mod todo_list;
+
 use std::io;
 use std::io::Write;
+use std::process::ExitCode;
 
-struct Task {
-    title: String,
-    done: bool,
-}
+use command::parse_command;
+use todo_list::{Outcome, TodoList};
 
-impl Task {
-    fn new(title: String) -> Task {
-        Task { title, done: false }
-    }
-}
+const PROMPT: &str = "> ";
+const USAGE: &str = "Commands: add <task> | done <number> | list | quit";
 
-enum Command {
-    Add(String),
-    Done(usize),
-    List,
-    Quit,
-    Unknown,
-}
+fn main() -> ExitCode {
+    print_banner();
 
-fn parse_command(input: &str) -> Command {
-    let input = input.trim();
-
-    if input.eq_ignore_ascii_case("list") {
-        return Command::List;
-    }
-    if input.eq_ignore_ascii_case("quit") {
-        return Command::Quit;
-    }
-    if let Some(title) = input.strip_prefix("add ") {
-        let title = title.trim();
-        if title.is_empty() {
-            return Command::Unknown;
-        }
-        return Command::Add(title.to_string());
-    }
-    if let Some(number) = input.strip_prefix("done ") {
-        if let Ok(index) = number.trim().parse::<usize>() {
-            return Command::Done(index);
-        }
-    }
-
-    Command::Unknown
-}
-
-fn list_tasks(tasks: &[Task]) {
-    if tasks.is_empty() {
-        println!("  No tasks yet. Use 'add <task>' to create one.");
-        return;
-    }
-    for (index, task) in tasks.iter().enumerate() {
-        let check = if task.done { "x" } else { " " };
-        println!("  {}. [{}] {}", index + 1, check, task.title);
-    }
-}
-
-fn read_input(prompt: &str) -> Result<String, io::Error> {
-    print!("{prompt}");
-    io::stdout().flush()?;
-    let mut input = String::new();
-    io::stdin().read_line(&mut input)?;
-    Ok(input.trim().to_string())
-}
-
-fn main() {
-    let mut tasks: Vec<Task> = Vec::new();
-
-    println!("=== To-Do List ===");
-    println!("Commands: add <task> | done <number> | list | quit");
-    println!();
+    let mut tasks = TodoList::new();
 
     loop {
-        let input = match read_input("> ") {
-            Ok(input) => input,
+        match read_input(PROMPT) {
+            Ok(Some(input)) => {
+                let outcome = tasks.apply(parse_command(&input));
+                if print_outcome(&outcome) {
+                    return ExitCode::SUCCESS;
+                }
+            }
+            // EOF (Ctrl-D or a closed pipe): stop rather than spin forever.
+            Ok(None) => {
+                println!();
+                println!("Bye!");
+                return ExitCode::SUCCESS;
+            }
             Err(error) => {
                 eprintln!("Error reading input: {error}");
-                continue;
-            }
-        };
-
-        match parse_command(&input) {
-            Command::Add(title) => {
-                println!("  Added: {title}");
-                tasks.push(Task::new(title));
-            }
-            Command::Done(number) => {
-                if number == 0 || number > tasks.len() {
-                    println!("  Invalid task number. Use 'list' to see tasks.");
-                    continue;
-                }
-                tasks[number - 1].done = true;
-                println!("  Completed: {}", tasks[number - 1].title);
-            }
-            Command::List => {
-                list_tasks(&tasks);
-            }
-            Command::Quit => {
-                println!("Bye!");
-                break;
-            }
-            Command::Unknown => {
-                println!("  Unknown command. Try: add <task> | done <number> | list | quit");
+                return ExitCode::FAILURE;
             }
         }
     }
+}
+
+fn print_banner() {
+    println!("=== To-Do List ===");
+    println!("{USAGE}");
+    println!();
+}
+
+/// Prints an outcome. Returns true when the program should stop.
+fn print_outcome(outcome: &Outcome) -> bool {
+    match outcome {
+        Outcome::Message(lines) => {
+            print_lines(lines);
+            false
+        }
+        Outcome::Exit(lines) => {
+            print_lines(lines);
+            true
+        }
+    }
+}
+
+fn print_lines(lines: &[String]) {
+    for line in lines {
+        println!("{line}");
+    }
+}
+
+/// Reads one trimmed line. `Ok(None)` means end of input.
+fn read_input(prompt: &str) -> Result<Option<String>, io::Error> {
+    print!("{prompt}");
+    io::stdout().flush()?;
+
+    let mut input = String::new();
+    let bytes_read = io::stdin().read_line(&mut input)?;
+    if bytes_read == 0 {
+        return Ok(None);
+    }
+    Ok(Some(input.trim().to_string()))
 }
